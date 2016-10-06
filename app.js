@@ -6,7 +6,10 @@ function MainController($timeout) {
     ctrl.newTask = '';
 
     function addTask() {
-    	ctrl.allTasks.push(ctrl.newTask);
+    	ctrl.allTasks.push({
+    		value: ctrl.newTask,
+    		time: Date.now()
+    	});
     	ctrl.newTask = '';
     }
 

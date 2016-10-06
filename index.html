@@ -50,7 +50,7 @@
         </div>
         <hr>
         
-        <div class="row" ng-repeat="task in mainCtrl.allTasks">
+        <div class="row" ng-repeat="task in mainCtrl.allTasks | orderBy: '-time'">
             <div class="col-xs-2">
                 <div class="col-xs-2">
                     <button>
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="col-xs-9 task-item">
-                {{task}}
+                {{task.value}}
             </div>
         </div>
            

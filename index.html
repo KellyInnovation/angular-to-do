@@ -53,12 +53,12 @@
         <div class="row" ng-repeat="task in mainCtrl.allTasks | orderBy: '-time'">
             <div class="col-xs-2">
                 <div class="col-xs-2">
-                    <button>
+                    <button ng-click="mainCtrl.completeTask($index)">
                         <i class="fa fa-check" aria-hidden="true"></i>
                     </button>
                 </div>
                 <div class="col-xs-2">
-                    <button>
+                    <button ng-click="mainCtrl.editTask(task.value)">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -69,6 +69,7 @@
                 </div>
             </div>
             <div class="col-xs-9 task-item">
+                <input type="text" class="form-control" ng-model="mainCtrl.newTask" placeholder="{{task.value}}">
                 {{task.value}}
             </div>
         </div>

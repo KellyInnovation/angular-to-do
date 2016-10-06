@@ -58,7 +58,7 @@
                     </button>
                 </div>
                 <div class="col-xs-2">
-                    <button ng-click="mainCtrl.editTask(task.value)">
+                    <button ng-click="mainCtrl.editClicked">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -69,7 +69,12 @@
                 </div>
             </div>
             <div class="col-xs-9 task-item">
-                <input type="text" class="form-control" ng-model="mainCtrl.newTask" placeholder="{{task.value}}">
+                <div ng-show="mainCtrl.editClicked">
+                    <input type="text" class="form-control" ng-model="mainCtrl.newTask" placeholder="{{task.value}}">
+                    <button ng-click="mainCtrl.editTask($index)">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
                 {{task.value}}
             </div>
         </div>

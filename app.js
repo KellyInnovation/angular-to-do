@@ -25,6 +25,7 @@ function MainController($timeout) {
 
     function editTask(index, value) {
     	ctrl.newTask = value;
+    	ctrl.editClicked = false;
     }
 
     ctrl.addTask = addTask;

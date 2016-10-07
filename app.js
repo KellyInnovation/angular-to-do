@@ -6,6 +6,7 @@ function MainController() {
     ctrl.newTask = '';
     ctrl.editClicked = false;
     ctrl.editItem = '';
+    ctrl.order = '-time';
 
     function addTask() {
     	ctrl.allTasks.push({
@@ -36,11 +37,16 @@ function MainController() {
     	ctrl.editClicked = false;
     }
 
+    function setOrder(order) {
+    	ctrl.order = order;
+    }
+
     ctrl.addTask = addTask;
     ctrl.deleteTask = deleteTask;
     ctrl.completeTask = completeTask;
     ctrl.editShow = editShow;
     ctrl.editTask = editTask;
+    ctrl.setOrder = setOrder;
 
 }
 

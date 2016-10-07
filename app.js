@@ -16,7 +16,8 @@ function MainController() {
     }
 
     function deleteTask(task) {
-    	ctrl.allTasks.splice(task.index, 1);
+    	var index = ctrl.allTasks.indexOf(task);
+    	ctrl.allTasks.splice(index, 1);
     }
 
     function completeTask(task) {

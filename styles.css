@@ -50,3 +50,9 @@ button {
 	padding-left: 5px;
 	height: 28px;
 }
+
+.completed-task {
+	text-decoration: line-through;
+	background-color: rgb(152,157,150);
+	text-align: center;
+}

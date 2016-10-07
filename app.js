@@ -5,6 +5,7 @@ function MainController() {
     ctrl.allTasks = [];
     ctrl.newTask = '';
     ctrl.editClicked = false;
+    ctrl.editItem = '';
 
     function addTask() {
     	ctrl.allTasks.push({
@@ -21,10 +22,16 @@ function MainController() {
     }
 
     function completeTask(task) {
-    	ctrl.allTasks.complete = true;
+    	task.complete = true;
     }
 
-    function editTask(index, value) {
+    function editShow(task) {
+    	var index = ctrl.allTasks.indexOf(task);
+    	ctrl.editItem = task[index];
+    	ctrl.editClicked = true;
+    }
+
+    function editTask(value) {
     	ctrl.newTask = value;
     	ctrl.editClicked = false;
     }
@@ -32,6 +39,7 @@ function MainController() {
     ctrl.addTask = addTask;
     ctrl.deleteTask = deleteTask;
     ctrl.completeTask = completeTask;
+    ctrl.editShow = editShow;
     ctrl.editTask = editTask;
 
 }

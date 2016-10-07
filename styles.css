@@ -13,6 +13,7 @@ footer {
 
 header {
 	font-family: cursive;
+	width: 100%;
 }
 
 button {
@@ -20,6 +21,8 @@ button {
 	background-color: rgb(67,103,128);
 	color: white;
 }
+
+
 
 .navbar-header {
 	background-color: rgb(71,121,155);	

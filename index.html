@@ -10,10 +10,9 @@
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.22.1/ramda.min.js"></script>
-    <script src="app.js"></script>
     <script src="https://use.fontawesome.com/a04d9e4c1c.js"></script>
+    <link rel="stylesheet" type="text/css" href="/to-do/styles.css" />
+    
     <link rel="stylesheet" type="text/css" href="/to-do/styles.css" />
 </head>
 <body ng-cloak ng-controller="MainCtrl as mainCtrl">
@@ -36,16 +35,16 @@
         </div>
         <div class="row">
             <div class="add-todo col-xs-12">
-                <div class="form-group">
+                <form class="form-group">
                     <div class="col-xs-10">
-                        <input type="text" class="form-control" ng-model="mainCtrl.newTask">
+                        <input type="text" class="form-control" ng-model="mainCtrl.newTask" ng-submit="mainCtrl.addTask()">
                     </div>
                     <div class="col-xs-2">
                         <button class="btn" ng-click="mainCtrl.addTask()">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <hr>
@@ -63,7 +62,7 @@
                     </button>
                 </div>
                 <div class="col-xs-2">
-                    <button ng-click="mainCtrl.deleteTask($index)">
+                    <button ng-click="mainCtrl.deleteTask(task)">
                         <i class="fa fa-times" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -91,6 +90,9 @@
     <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.22.1/ramda.min.js"></script>
+    <script src="app.js"></script>
 
 </body>
 </html>

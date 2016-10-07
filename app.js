@@ -1,6 +1,6 @@
 'use strict';
 
-function MainController($timeout) {
+function MainController() {
     const ctrl = this;
     ctrl.allTasks = [];
     ctrl.newTask = '';
@@ -15,8 +15,8 @@ function MainController($timeout) {
     	ctrl.newTask = '';
     }
 
-    function deleteTask(index) {
-    	ctrl.allTasks.splice(index, 1);
+    function deleteTask(task) {
+    	ctrl.allTasks.splice(task.index, 1);
     }
 
     function completeTask(task) {

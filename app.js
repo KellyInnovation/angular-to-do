@@ -2,11 +2,34 @@
 
 function MainController() {
     const ctrl = this;
+    ctrl.allLists = [];
+    ctrl.newList = '';
+    ctrl.newListClicked = false;
     ctrl.allTasks = [];
     ctrl.newTask = '';
     ctrl.order = '-time';
     ctrl.editMode = false;
     ctrl.currentEdit = {};
+
+    function addList()  {
+    	const existingList = R.find((item) => ctrl.newList === item.value)(ctrl.allLists);
+
+        if(existingList) {
+            existingList.time = Date.now();
+        } else {
+            ctrl.allLists.push({
+	    		title: ctrl.newList,
+	    		time: Date.now()
+    		});
+        }
+    	
+    	ctrl.newList = '';
+    	ctrl.newListClicked = false;
+    }
+
+    function newListForm () {
+    	ctrl.newListClicked = true;
+    }
 
     function addTask() {
     	const existingItem = R.find((item) => ctrl.newTask === item.value)(ctrl.allTasks);
@@ -59,6 +82,8 @@ function MainController() {
     	}
     }
 
+    ctrl.addList = addList;
+    ctrl.newListForm = newListForm;
     ctrl.addTask = addTask;
     ctrl.deleteTask = deleteTask;
     ctrl.completeTask = completeTask;

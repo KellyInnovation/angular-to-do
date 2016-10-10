@@ -11,8 +11,6 @@ footer {
 	text-align: center;
 }
 
-
-
 button {
 	border-radius: 5px;
 	background-color: rgb(67,103,128);
@@ -21,13 +19,23 @@ button {
 
 
 
-.navbar-header {
+.navbar {
 	background-color: rgb(71,121,155);
 	font-family: cursive;	
 }
 
 .name-header {
 	color: white;
+}
+
+.navbar-right {
+	float: right;
+}
+
+.new-list-button {
+	margin-top: 7px;
+	background-color: rgb(115,121,93);
+	font-family: cursive;
 }
 
 .todo1 {

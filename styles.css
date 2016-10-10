@@ -11,10 +11,7 @@ footer {
 	text-align: center;
 }
 
-header {
-	font-family: cursive;
-	width: 100%;
-}
+
 
 button {
 	border-radius: 5px;
@@ -25,10 +22,11 @@ button {
 
 
 .navbar-header {
-	background-color: rgb(71,121,155);	
+	background-color: rgb(71,121,155);
+	font-family: cursive;	
 }
 
-.page-title {
+.name-header {
 	color: white;
 }
 

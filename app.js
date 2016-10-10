@@ -4,16 +4,23 @@ function MainController() {
     const ctrl = this;
     ctrl.allTasks = [];
     ctrl.newTask = '';
-    ctrl.editClicked = false;
-    ctrl.editItem = '';
     ctrl.order = '-time';
+    ctrl.editMode = false;
+    ctrl.currentEdit = {};
 
     function addTask() {
-    	ctrl.allTasks.push({
-    		value: ctrl.newTask,
-    		time: Date.now(),
-    		complete: false
-    	});
+    	const existingItem = R.find((item) => ctrl.newTask === item.value)(ctrl.allTasks);
+
+        if(existingItem) {
+            existingItem.time = Date.now();
+        } else {
+            ctrl.allTasks.push({
+	    		value: ctrl.newTask,
+	    		time: Date.now(),
+	    		complete: false
+    		});
+        }
+    	
     	ctrl.newTask = '';
     }
 
@@ -26,27 +33,39 @@ function MainController() {
     	task.complete = true;
     }
 
-    function editShow(task) {
-    	var index = ctrl.allTasks.indexOf(task);
-    	ctrl.editItem = task[index];
-    	ctrl.editClicked = true;
+
+    function cancelEdit() {
+    	ctrl.editMode = false;
+    	ctrl.newTask = '';
     }
 
-    function editTask(value) {
-    	ctrl.newTask = value;
-    	ctrl.editClicked = false;
+    function updateTask() {
+    	ctrl.currentEdit.value = ctrl.newTask;
+    	cancelEdit();
+    }
+
+    function editTask(task) {
+    	ctrl.editMode = true;
+    	ctrl.newTask = task.value;
+    	ctrl.currentEdit = task;
     }
 
     function setOrder(order) {
-    	ctrl.order = order;
+    	if (ctrl.order === order) {
+    		ctrl.order = '-'+order;	
+    	}
+    	else {
+    		ctrl.order = order;
+    	}
     }
 
     ctrl.addTask = addTask;
     ctrl.deleteTask = deleteTask;
     ctrl.completeTask = completeTask;
-    ctrl.editShow = editShow;
     ctrl.editTask = editTask;
     ctrl.setOrder = setOrder;
+    ctrl.cancelEdit = cancelEdit;
+    ctrl.updateTask = updateTask;
 
 }
 

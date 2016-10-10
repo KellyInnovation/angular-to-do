@@ -10,6 +10,7 @@ function MainController() {
     ctrl.order = '-time';
     ctrl.editMode = false;
     ctrl.currentEdit = {};
+    ctrl.radioShow = '';
 
     function addList()  {
     	const existingList = R.find((item) => ctrl.newList === item.value)(ctrl.allLists);
@@ -31,7 +32,7 @@ function MainController() {
     	ctrl.newListClicked = true;
     }
 
-    function addTask() {
+    function addTask(list) {
     	const existingItem = R.find((item) => ctrl.newTask === item.value)(ctrl.allTasks);
 
         if(existingItem) {
@@ -39,6 +40,7 @@ function MainController() {
         } else {
             ctrl.allTasks.push({
 	    		value: ctrl.newTask,
+	    		list: list.title,
 	    		time: Date.now(),
 	    		complete: false
     		});
@@ -82,6 +84,12 @@ function MainController() {
     	}
     }
 
+    function completeFilter(task) {
+    	if (radioShow === 'all') {
+    		 return (task.complete == true && task.complete == false)
+    	}
+    }
+
     ctrl.addList = addList;
     ctrl.newListForm = newListForm;
     ctrl.addTask = addTask;
@@ -91,6 +99,7 @@ function MainController() {
     ctrl.setOrder = setOrder;
     ctrl.cancelEdit = cancelEdit;
     ctrl.updateTask = updateTask;
+    ctrl.completeFilter = completeFilter;
 
 }
 

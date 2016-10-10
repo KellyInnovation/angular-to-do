@@ -11,14 +11,14 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script src="https://use.fontawesome.com/a04d9e4c1c.js"></script>
-    <link rel="stylesheet" type="text/css" href="/to-do/styles.css" />
+    <link rel="stylesheet" type="text/css" href="/angular-to-do/styles.css" />
 </head>
 <body ng-cloak ng-controller="MainCtrl as mainCtrl">
     <header>
         <nav class="navbar navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="/to-do/" class="navbar-brand name-header">
+                    <a href="/angular-to-do/" class="navbar-brand name-header">
                         To Do
                     </a>
                 
@@ -40,88 +40,104 @@
         </form>
     </div>
 
-    <div class="container" ng-repeat="list in mainCtrl.allLists | orderBy: '-time'">
+    <div class="container">
            
-        <div class="container todo1">
-            
-            <div class="row">
-                <h3 class="col-xs-12 list-title">
-                    {{list.title}}
-                </h3>
-            </div>
-            <div class="row">
-                <div class="add-todo col-xs-12">
-                    <form class="form-group" ng-show="!mainCtrl.editMode" ng-submit="mainCtrl.addTask()">
-                        <div class="col-xs-10">
-                            <input type="text" class="form-control" ng-model="mainCtrl.newTask" >
+        <div class="container ">
+            <div class="row" >
+                <div class="col-sm-5 todo1" ng-repeat="list in mainCtrl.allLists | orderBy: 'time'">
+                    <div class="row">
+                        <h3 class="col-xs-12 list-title">
+                            {{list.title}}
+                        </h3>
+                    </div>
+                    <div class="row">
+                        <div class="add-todo col-xs-12">
+                            <form class="form-group" ng-show="!mainCtrl.editMode" ng-submit="mainCtrl.addTask(list)">
+                                <div class="col-xs-10">
+                                    <input type="text" class="form-control" ng-model="mainCtrl.newTask" >
+                                </div>
+                                <div class="col-xs-2">
+                                    <button class="btn" type="submit">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </form>
+                            <form class="form-group" ng-show="mainCtrl.editMode" ng-submit="mainCtrl.updateTask()">
+                                <div class="col-xs-10">
+                                    <input type="text" class="form-control" ng-model="mainCtrl.newTask" >
+                                </div>
+                                <div class="col-xs-2">
+                                    <button class="btn" type="submit">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="btn btn-danger" ng-click="cancelEdit()">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="col-xs-2">
-                            <button class="btn" type="submit">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </form>
-                    <form class="form-group" ng-show="mainCtrl.editMode" ng-submit="mainCtrl.updateTask()">
-                        <div class="col-xs-10">
-                            <input type="text" class="form-control" ng-model="mainCtrl.newTask" >
-                        </div>
-                        <div class="col-xs-2">
-                            <button class="btn" type="submit">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </button>
-                            <button class="btn btn-danger" ng-click="cancelEdit()">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <hr>
-            
-            <div class="row">
-                <div class="col-xs-12">
-                    <button class="btn order-button col-xs-2 col-xs-offset-1" ng-click="mainCtrl.setOrder('time')">
-                        Created
-                    </button>
-                    <button class="btn order-button col-xs-2 col-xs-offset-1" ng-click="mainCtrl.setOrder('value')">
-                        Alphabetical
-                    </button>
-                    <button class="btn order-button col-xs-2 col-xs-offset-1" ng-click="mainCtrl.setOrder('complete')">
-                        Completed
-                    </button>
+                    </div>
+                    <hr>
                     
-                </div>
-            </div>
-            <hr>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button class="btn order-button col-xs-2 col-xs-offset-1" ng-click="mainCtrl.setOrder('time')">
+                                Created
+                            </button>
+                            <button class="btn order-button col-xs-2 col-xs-offset-1" ng-click="mainCtrl.setOrder('value')">
+                                Alphabetical
+                            </button>
+                            <button class="btn order-button col-xs-2 col-xs-offset-1" ng-click="mainCtrl.setOrder('complete')">
+                                Completed
+                            </button>
 
-            <div class="row" ng-repeat="task in mainCtrl.allTasks | orderBy:mainCtrl.order">
-                <div class="col-xs-2">
-                    <div class="col-xs-2">
-                        <button ng-click="mainCtrl.completeTask(task)">
-                            <i class="fa fa-check" aria-hidden="true"></i>
-                        </button>
+                            <fieldset class="form-group">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optionsRadios" value="all" ng-model="mainCtrl.radioShow" checked>All
+                                    </label>
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" value="incomplete" name="optionsRadios" ng-model="mainCtrl.radioShow">ToDo
+                                    </label>
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" value="complete" name="optionsRadios" ng-model="mainCtrl.radioShow">Done
+                                    </label>
+                                </div>
+                            </fieldset>
+                            
+                        </div>
                     </div>
-                    <div class="col-xs-2">
-                        <button ng-click="mainCtrl.editTask(task)">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                    <div class="col-xs-2">
-                        <button ng-click="mainCtrl.deleteTask(task)">
-                            <i class="fa fa-times" aria-hidden="true"></i>
-                        </button>
+                    <hr>
+
+                    <div class="row" ng-repeat="task in mainCtrl.allTasks | orderBy:mainCtrl.order">
+                        <div class="col-xs-2">
+                            <div class="col-xs-2">
+                                <button ng-click="mainCtrl.completeTask(task)">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <div class="col-xs-2">
+                                <button ng-click="mainCtrl.editTask(task)">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <div class="col-xs-2">
+                                <button ng-click="mainCtrl.deleteTask(task)">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-xs-9 task-item">
+                            <div ng-if="task.complete==false">
+                                {{task.value}}
+                            </div>
+                            <div ng-if="task.complete==true" class="completed-task">
+                                {{task.value}}
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-xs-9 task-item">
-                    <div ng-if="task.complete==false">
-                        {{task.value}}
-                    </div>
-                    <div ng-if="task.complete==true" class="completed-task">
-                        {{task.value}}
-                    </div>
-                </div>
-            </div>
-               
+            </div>   
         </div>    
     </div>
 

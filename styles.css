@@ -41,6 +41,7 @@ button {
 .todo1 {
 	border: 2px solid grey;
 	background-color: rgb(186,190,170);
+	margin: 10px;
 }
 
 .list-title {
@@ -66,4 +67,8 @@ button {
 .order-button {
 	font-size: 7px;
 	text-align: center;
+}
+
+.form-check-label {
+	font-size: 5px;
 }

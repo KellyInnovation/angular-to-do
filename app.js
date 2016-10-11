@@ -40,7 +40,7 @@ function MainController() {
         } else {
             ctrl.allTasks.push({
 	    		value: ctrl.newTask,
-	    		list: list.title,
+	    		list_title: list.title,
 	    		time: Date.now(),
 	    		complete: false
     		});
@@ -84,11 +84,6 @@ function MainController() {
     	}
     }
 
-    function completeFilter(task) {
-    	if (radioShow === 'all') {
-    		 return (task.complete == true && task.complete == false)
-    	}
-    }
 
     ctrl.addList = addList;
     ctrl.newListForm = newListForm;
@@ -99,7 +94,6 @@ function MainController() {
     ctrl.setOrder = setOrder;
     ctrl.cancelEdit = cancelEdit;
     ctrl.updateTask = updateTask;
-    ctrl.completeFilter = completeFilter;
 
 }
 

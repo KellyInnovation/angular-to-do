@@ -6,7 +6,7 @@ body {
 footer {
 	font-size: 10px;
 	position: fixed;
-	bottom: 0;
+	bottom: 10px;
 	width: 100%;
 	text-align: center;
 }
@@ -65,10 +65,10 @@ button {
 }
 
 .order-button {
-	font-size: 7px;
+	font-size: 12px;
 	text-align: center;
 }
 
 .form-check-label {
-	font-size: 5px;
+	font-size: 15px;
 }

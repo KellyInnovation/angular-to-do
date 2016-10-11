@@ -1,1 +1,1 @@
-# angular-to-do
+To Do app using Angular

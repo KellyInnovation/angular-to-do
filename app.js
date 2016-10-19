@@ -4,10 +4,9 @@ function MainController() {
     const ctrl = this;
     ctrl.allLists = [];
     ctrl.newList = '';
-    ctrl.newListClicked = false;
+    ctrl.newListClicked = true;
     ctrl.allTasks = [];
-    ctrl.newTask = '';
-    ctrl.order = '-time';
+
     ctrl.editMode = false;
     ctrl.currentEdit = {};
     ctrl.radioShow = '';
@@ -20,7 +19,10 @@ function MainController() {
         } else {
             ctrl.allLists.push({
 	    		title: ctrl.newList,
-	    		time: Date.now()
+	    		time: Date.now(),
+	    		order: '-time',
+	    		radioShow: '',
+	    		tasks: [],
     		});
         }
     	
@@ -33,25 +35,27 @@ function MainController() {
     }
 
     function addTask(list) {
-    	const existingItem = R.find((item) => ctrl.newTask === item.value)(ctrl.allTasks);
+    	const existingItem = R.find((item) => list.newTask === item.value)(list);
 
         if(existingItem) {
             existingItem.time = Date.now();
         } else {
-            ctrl.allTasks.push({
-	    		value: ctrl.newTask,
+            list.tasks.push({
+	    		value: list.newTask,
 	    		list_title: list.title,
 	    		time: Date.now(),
 	    		complete: false
     		});
         }
     	
-    	ctrl.newTask = '';
+    	list.newTask = '';
+
     }
 
-    function deleteTask(task) {
-    	var index = ctrl.allTasks.indexOf(task);
-    	ctrl.allTasks.splice(index, 1);
+
+    function deleteTask(task, list) {
+    	var index = list.tasks.indexOf(task);
+    	list.tasks.splice(index, 1);
     }
 
     function completeTask(task) {
@@ -59,29 +63,30 @@ function MainController() {
     }
 
 
-    function cancelEdit() {
-    	ctrl.editMode = false;
-    	ctrl.newTask = '';
+    function cancelEdit(list) {
+    	list.editMode = false;
+    	list.newTask = '';
     }
 
-    function updateTask() {
-    	ctrl.currentEdit.value = ctrl.newTask;
-    	cancelEdit();
+    function updateTask(list) {
+    	list.currentEdit.value = list.newTask;
+    	cancelEdit(list);
     }
 
-    function editTask(task) {
-    	ctrl.editMode = true;
-    	ctrl.newTask = task.value;
-    	ctrl.currentEdit = task;
+    function editTask(task, list) {
+    	list.editMode = true;
+    	list.newTask = task.value;
+    	list.currentEdit = task;
     }
 
-    function setOrder(order) {
-    	if (ctrl.order === order) {
-    		ctrl.order = '-'+order;	
+    function setOrder(order, list) {
+    	if (list.order === order) {
+    		list.order = '-'+order;	
     	}
     	else {
-    		ctrl.order = order;
+    		list.order = order;
     	}
+
     }
 
 

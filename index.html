@@ -22,7 +22,7 @@
                         To Do
                     </a>
                 
-                    <button class="btn navbar-right new-list-button" ng-click="mainCtrl.newListForm()">
+                    <button class="btn pull-right new-list-button" ng-click="mainCtrl.newListForm()">
                         <i class="fa fa-plus" aria-hidden="true"> New List</i>
                     </button>
                 </div>
@@ -40,7 +40,8 @@
         </form>
     </div>
 
-    <div class="container">                   
+    <div class="container">
+                   
         <div class="row" >
             <div class="col-sm-5 todo1" ng-repeat="list in mainCtrl.allLists | orderBy: 'time' ">
                 <div class="row">
@@ -50,9 +51,9 @@
                 </div>
                 <div class="row">
                     <div class="add-todo col-xs-12">
-                        <form class="form-group" ng-show="!mainCtrl.editMode" ng-submit="mainCtrl.addTask(list)">
+                        <form class="form-group" ng-show="!list.editMode" ng-submit="mainCtrl.addTask(list)">
                             <div class="col-xs-10">
-                                <input type="text" class="form-control" ng-model="mainCtrl.newTask" >
+                                <input type="text" class="form-control" ng-model="list.newTask" >
                             </div>
                             <div class="col-xs-2">
                                 <button class="btn" type="submit">
@@ -60,15 +61,15 @@
                                 </button>
                             </div>
                         </form>
-                        <form class="form-group" ng-show="mainCtrl.editMode" ng-submit="mainCtrl.updateTask()">
+                        <form class="form-group" ng-show="list.editMode" ng-submit="mainCtrl.updateTask(list)">
                             <div class="col-xs-10">
-                                <input type="text" class="form-control" ng-model="mainCtrl.newTask" >
+                                <input type="text" class="form-control" ng-model="list.newTask" >
                             </div>
                             <div class="col-xs-2">
                                 <button class="btn" type="submit">
                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                 </button>
-                                <button class="btn btn-danger" ng-click="cancelEdit()">
+                                <button class="btn btn-danger" ng-click="cancelEdit(list)">
                                     <i class="fa fa-times" aria-hidden="true"></i>
                                 </button>
                             </div>
@@ -79,26 +80,26 @@
                 
                 <div class="row">
                     <div class="col-xs-12">
-                        <button class="btn order-button col-xs-2 col-xs-offset-1" ng-click="mainCtrl.setOrder('time')">
-                            Created
+                        <button class="btn order-button col-xs-2 col-xs-offset-1" ng-click="mainCtrl.setOrder('time', list)">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
                         </button>
-                        <button class="btn order-button col-xs-2 col-xs-offset-1" ng-click="mainCtrl.setOrder('value')">
-                            Alphabetical
+                        <button class="btn order-button col-xs-2 col-xs-offset-1" ng-click="mainCtrl.setOrder('value', list)">
+                            A->Z
                         </button>
-                        <button class="btn order-button col-xs-2 col-xs-offset-1" ng-click="mainCtrl.setOrder('complete')">
-                            Completed
+                        <button class="btn order-button col-xs-2 col-xs-offset-1" ng-click="mainCtrl.setOrder('complete', list)">
+                            <i class="fa fa-check" aria-hidden="true"></i>
                         </button>
 
                         <fieldset class="form-group">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input type="radio" class="radio-inline" name="optradio" ng-model="mainCtrl.radioShow" ng-value="all" checked>All
+                                    <input type="radio" class="radio-inline" name="optradio" ng-model="list.radioShow" ng-value="all" checked>All
                                 </label>
                                 <label class="form-check-label">
-                                    <input type="radio" class="radio-inline" ng-value="false" name="optradio" ng-model="mainCtrl.radioShow">ToDo
+                                    <input type="radio" class="radio-inline" ng-value="false" name="optradio" ng-model="list.radioShow">ToDo
                                 </label>
                                 <label class="form-check-label">
-                                    <input type="radio" class="radio-inline" ng-value="true" name="optradio" ng-model="mainCtrl.radioShow">Done
+                                    <input type="radio" class="radio-inline" ng-value="true" name="optradio" ng-model="list.radioShow">Done
                                 </label>
                             </div>
                         </fieldset>
@@ -107,7 +108,7 @@
                 </div>
                 <hr>
 
-                <div class="row" ng-repeat="task in mainCtrl.allTasks | orderBy:mainCtrl.order | filter:mainCtrl.radioShow ">
+                <div class="row" ng-repeat="task in list.tasks | orderBy:list.order | filter:list.radioShow ">
                     
                     <div class="col-xs-3">
                         <div class="col-xs-2">
@@ -116,12 +117,12 @@
                             </button>
                         </div>
                         <div class="col-xs-2">
-                            <button ng-click="mainCtrl.editTask(task)">
+                            <button ng-click="mainCtrl.editTask(task, list)">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
                         </div>
                         <div class="col-xs-2">
-                            <button ng-click="mainCtrl.deleteTask(task)">
+                            <button ng-click="mainCtrl.deleteTask(task, list)">
                                 <i class="fa fa-times" aria-hidden="true"></i>
                             </button>
                         </div>
